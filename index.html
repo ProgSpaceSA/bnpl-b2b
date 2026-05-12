@@ -1016,6 +1016,25 @@
                 color: var(--primary-deep);
             }
 
+            .top-date {
+                margin: 0 0 0.9rem;
+                padding: 0.55rem 0.85rem;
+                border-radius: 999px;
+                border: 1px solid var(--border-soft);
+                background: var(--surface);
+                color: var(--text-soft);
+                font-family: var(--font-display);
+                font-weight: 700;
+                font-size: 0.9rem;
+                display: inline-flex;
+                align-items: center;
+                gap: 0.35rem;
+            }
+
+            .top-date strong {
+                color: var(--primary-deep);
+            }
+
             /* ===== Footer ===== */
             footer {
                 margin-top: 2rem;
@@ -1034,6 +1053,12 @@
                 gap: 0.6rem;
                 justify-content: center;
                 margin-bottom: 0.85rem;
+            }
+
+            .validity-note {
+                margin: 0.55rem 0 0;
+                color: var(--primary-deep);
+                font-weight: 700;
             }
 
             .btn {
@@ -1588,6 +1613,12 @@
                     font-size: 1.2rem;
                 }
 
+                .top-date {
+                    width: 100%;
+                    justify-content: center;
+                    font-size: 0.84rem;
+                }
+
                 .card {
                     padding: 1.1rem 1rem;
                 }
@@ -1742,6 +1773,10 @@
                     margin-bottom: 0.7rem;
                 }
 
+                .top-date {
+                    padding: 0.5rem 0.75rem;
+                }
+
                 .card {
                     padding: 1rem 0.9rem;
                 }
@@ -1857,6 +1892,10 @@
                     >شريكك التقني لبناء حلول مالية موثوقة</span
                 >
             </div>
+            <p class="top-date">
+                تاريخ اليوم:
+                <strong id="issue-date-top">—</strong>
+            </p>
 
             <header class="hero" id="top">
                 <div class="hero-grid">
@@ -1881,7 +1920,7 @@
                         <dt>تاريخ الإصدار</dt>
                         <dd id="issue-date">—</dd>
                         <dt>صالح لغاية</dt>
-                        <dd>30 يوماً من تاريخ الإصدار</dd>
+                        <dd id="valid-until">—</dd>
                     </dl>
                 </div>
             </header>
@@ -1907,6 +1946,68 @@
                                 <strong>سقف ثابت قدره 60,000 ريال سعودي</strong>
                                 عند تفعيل كامل نطاق المشروع.
                             </p>
+                        </div>
+                    </section>
+
+                    <section class="section reveal" id="technical-specs">
+                        <div class="section-head">
+                            <h2>الخصائص الفنية</h2>
+                        </div>
+                        <div class="terms">
+                            <div class="info-card">
+                                <h4>المواصفات المعتمدة</h4>
+                                <ul>
+                                    <li>
+                                        صفحات الويب تكون متوافقة مع حجم شاشات
+                                        الكمبيوتر والهواتف المحمولة.
+                                    </li>
+                                    <li>
+                                        شامل استضافة واسم نطاق وشهادة SSL لمدة
+                                        سنة، بحد أقصى 2,500 ريال للاستضافة و100
+                                        ريال للنطاق.
+                                    </li>
+                                    <li>
+                                        شامل دعم فني لمدة سنة من تاريخ التسليم.
+                                    </li>
+                                    <li>
+                                        تقديم بريد إلكتروني واحد لمدة سنة باسم
+                                        النطاق.
+                                    </li>
+                                    <li>
+                                        تصميم الواجهات بأحدث توجهات التصميم في
+                                        نفس المجال.
+                                    </li>
+                                    <li>
+                                        لغات البرمجة المستخدمة: دارت على منصة
+                                        فلاتر – تايبسكريبت على منصة ريآكت.
+                                    </li>
+                                    <li>
+                                        معمارية المشروع ستكون معمارية طبقية
+                                        تشمل: واجهات المستخدم – الواجهات
+                                        البرمجية – المنطق – قواعد البيانات.
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="info-card">
+                                <h4>ملاحظات</h4>
+                                <ul>
+                                    <li>
+                                        التنفيذ لا يشمل استخراج التراخيص ولا
+                                        المستندات الحكومية كالسجلات التجارية
+                                        وشهادة الضريبة والتقديم على البنوك لفتح
+                                        الحسابات وغيرها حال الحاجة.
+                                    </li>
+                                    <li>
+                                        التنفيذ لا يشمل إضافة بيانات المنتجات،
+                                        وسيتم إضافة عدد 5 من المنتجات من أجل
+                                        استعراض التصميم.
+                                    </li>
+                                    <li>
+                                        غير شامل أي تكاليف إضافية أو اشتراكات
+                                        مثل اشتراكات الرسائل والشحن.
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </section>
 
@@ -3055,6 +3156,9 @@
                             >
                             — وثيقة عرض سعر رسمي. جميع الحقوق محفوظة.
                         </p>
+                        <p class="validity-note">
+                            عرض السعر هذا صالح لمدة أسبوعين من تاريخه.
+                        </p>
                     </footer>
                 </main>
 
@@ -3157,18 +3261,37 @@
                     );
                 }
 
+                function formatArabicDate(d) {
+                    try {
+                        return new Intl.DateTimeFormat("ar-SA-u-nu-latn", {
+                            dateStyle: "long",
+                        }).format(d);
+                    } catch (e) {
+                        return d.toLocaleDateString();
+                    }
+                }
+
+                function addDays(d, days) {
+                    var next = new Date(d);
+                    next.setDate(next.getDate() + days);
+                    return next;
+                }
+
+                var today = new Date();
+                var issueText = formatArabicDate(today);
                 var issueEl = $("issue-date");
                 if (issueEl) {
-                    try {
-                        issueEl.textContent = new Intl.DateTimeFormat(
-                            "ar-SA-u-nu-latn",
-                            {
-                                dateStyle: "long",
-                            },
-                        ).format(new Date());
-                    } catch (e) {
-                        issueEl.textContent = new Date().toLocaleDateString();
-                    }
+                    issueEl.textContent = issueText;
+                }
+
+                var issueTopEl = $("issue-date-top");
+                if (issueTopEl) issueTopEl.textContent = issueText;
+
+                var validUntilEl = $("valid-until");
+                if (validUntilEl) {
+                    validUntilEl.textContent =
+                        formatArabicDate(addDays(today, 14)) +
+                        " (أسبوعان من تاريخ الإصدار)";
                 }
 
                 var yearEl = $("year");
