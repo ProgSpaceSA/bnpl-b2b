@@ -3265,24 +3265,7 @@
                     );
                 }
 
-                function formatArabicDate(d) {
-                    try {
-                        return new Intl.DateTimeFormat("ar-SA-u-nu-latn", {
-                            dateStyle: "long",
-                        }).format(d);
-                    } catch (e) {
-                        return d.toLocaleDateString();
-                    }
-                }
-
-                function addDays(d, days) {
-                    var next = new Date(d);
-                    next.setDate(next.getDate() + days);
-                    return next;
-                }
-
-                var today = new Date();
-                var issueText = formatArabicDate(today);
+                var issueText = "13 مايو 2026";
                 var issueEl = $("issue-date");
                 if (issueEl) {
                     issueEl.textContent = issueText;
@@ -3294,8 +3277,7 @@
                 var validUntilEl = $("valid-until");
                 if (validUntilEl) {
                     validUntilEl.textContent =
-                        formatArabicDate(addDays(today, 14)) +
-                        " (أسبوعان من تاريخ الإصدار)";
+                        "27 مايو 2026 (أسبوعان من تاريخ الإصدار)";
                 }
 
                 var yearEl = $("year");
